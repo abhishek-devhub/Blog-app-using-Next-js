@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { connectDB } from "../../lib/database";
 
 export default function Home() {
   return (
