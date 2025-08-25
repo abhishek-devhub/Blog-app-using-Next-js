@@ -3,7 +3,9 @@ import React from 'react'
 const login = () => {
   return (
     <div>
-      i am the login page
+      <div className="box">
+        
+      </div>
     </div>
   )
 }
