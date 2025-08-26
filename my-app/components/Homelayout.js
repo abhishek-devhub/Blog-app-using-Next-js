@@ -1,30 +1,17 @@
 "use client";
-import { set } from 'mongoose';
+import login from "@/app/login/page";
 import React, { useState } from 'react'
 import { useEffect } from 'react'
+import { useAuth } from "@/app/Context/AuthContext";
 
 const Homelayout = () => {
     const [Blogs, setBlogs] = useState([])
-    const [Category, setCategory] = useState([{
-        name: "Technology",
-    },
-    {
-        name: "Lifestyle",
-    },
-    {
-        name: "Travel",
-    },
-    {
-        name: "Food",
-    },
-    {
-        name: "Education",
-    }])
+    const {isloggedIn} = useAuth();
 
     useEffect(()=>{
         const fetchData = async () => {
             try {
-        const data = await fetch("https://dev.to/api/articles?per_page=15")
+        const data = await fetch("https://dev.to/api/articles?per_page=3")
         const res = await data.json()
         setBlogs(res)
         console.log(res)
