@@ -64,9 +64,9 @@ const Homelayout = () => {
         <h2 className="text-3xl text-gray-400 font-bold">Unleash Your Thoughts</h2>
         <p className="text-lg mt-2">Explore the latest blogs and articles.</p>
       </div>
-      <div className={`blogs mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 ${!isloggedIn ? 'blur-sm' : ''}`}>
+      <div className={`blogs mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6  ${!isloggedIn ? 'blur-sm' : ''}`}>
         {Blogs.map((blog) => (
-          <div key={blog.id} className="blog-card bg-white p-4 rounded-lg shadow-md">
+          <div key={blog.id} className="blog-card bg-white p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-gray-700">
             <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
             <p className="text-gray-600 mb-4">{blog.description}</p>
             {isloggedIn && <a href={blog.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Read More</a>}
