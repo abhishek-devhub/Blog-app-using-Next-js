@@ -4,6 +4,8 @@ import { useEffect } from 'react'
 import { useAuth } from "@/app/Context/AuthContext";
 import SplitText from './textanimation';
 import TextType from './typinganimation';
+import Iridescence from './background';
+
 
 
 const Homelayout = () => {
@@ -24,7 +26,8 @@ const Homelayout = () => {
     fetchData()
   }, [])
   return (
-    <div className=" bg-violet-300 min-h-screen w-full p-3">
+
+    <div className=" min-h-screen w-full p-3">
       <div className="header flex items-center justify-between">
         <div className='flex items-center gap-3'>
           <span className='log text-blue-600 text-3xl'><i className="fa-solid fa-blog"></i></span>
@@ -54,14 +57,14 @@ const Homelayout = () => {
       </div>
       <div className="main-content text-center mt-12">
         <TextType
-          className="text-4xl md:text-5xl lg:text-4xl font-extrabold text-gray-800 p-3"
+          className="text-black text-4xl md:text-5xl lg:text-4xl font-extrabold  p-3"
           text={["Welcome to our Blog Page!", "Here you can Post your Blogs", "Read Amazing Blogs"]}
           typingSpeed={75}
           pauseDuration={1500}
           showCursor={true}
           cursorCharacter="|"
         />
-        <h2 className="text-3xl text-gray-400 font-bold">Unleash Your Thoughts</h2>
+        <h2 className="text-3xl text-gray-900 font-bold">Unleash Your Thoughts</h2>
         <p className="text-lg mt-2">Explore the latest blogs and articles.</p>
       </div>
       <div className={`blogs mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6  ${!isloggedIn ? 'blur-sm' : ''}`}>
@@ -74,8 +77,8 @@ const Homelayout = () => {
         ))}
       </div>
       {!isloggedIn && (
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <p className="bg-black/70 text-white px-6 py-3 rounded-lg text-3xl font-semibold shadow-lg mt-20">
+        <div className="relative flex justify-center bottom-50 ">
+          <p className="bg-black/70 text-white px-6 py-3 rounded-lg text-3xl font-semibold shadow-lg ">
             🔒 Please login to see the blogs!
           </p>
         </div>

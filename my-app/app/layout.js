@@ -33,7 +33,9 @@ export default function RootLayout({ children }) {
       >
         <Authprovider>
           {children}
+          
         </Authprovider>
+        
       </body>
     </html>
   );
