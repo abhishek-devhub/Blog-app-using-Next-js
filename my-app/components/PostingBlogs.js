@@ -2,29 +2,40 @@
 import React from 'react'
 import Image from 'next/image';
 import { useState } from 'react';
+
 const PostingBlogs = () => {
   const [Author, setAuthor] = useState('');
   const [Title, setTitle] = useState('');
   const [Content, setContent] = useState('');
   const [Category, setCategory] = useState('Technology');
+
+  function handlesubmit(e){
+    e.preventDefault();
+    const blogData = {Author, Title, Content, Category};
+    console.log(blogData);
+  }
   
   return (
     <div>
       <h1 className='posts text-center text-violet-900 text-3xl font-bold m-2'>Posts your own Blogs Now Free</h1>
       <div className="both flex justify-around items-center p-2 gap-3">
         <div className="left">
-          <Image src="https://img.freepik.com/vector-premium/vector-concepto-blogs_269504-2043.jpg?w=2000" alt='blogingapp' className='rounded-lg hover:scale-101 transition-transform duration-300' height={500} width={550}></Image>
+          <Image src="https://img.freepik.com/vector-premium/vector-concepto-blogs_269504-2043.jpg?w=2000" alt='blogingapp' className='rounded-lg hover:scale-101 transition-transform duration-300' height={500} width={570}></Image>
         </div>
         <div className='right rounded backdrop-blur-lg w-150 p-3 '>
-          <form className='flex flex-col gap-3'>
+          <form className='flex flex-col gap-3' onSubmit={handlesubmit}>
+            {/* Author */}
             <label htmlFor="Name" className='author font-bold'>Author Name</label>
-            <input type="text" className='bg-white rounded-lg p-2 border-2 border-black' />
+            <input type="text" value={Author} className='bg-white rounded-lg p-2 border-2 border-black' onChange={(e)=>{setAuthor(e.target.value)}} />
+            {/* Title */}
             <label htmlFor="Title" className='font-bold'>Blog Title</label>
-            <input type="text" className='bg-white rounded-lg p-2 border-2 border-black' />
+            <input type="text"  value={Title}  className='bg-white rounded-lg p-2 border-2 border-black' onChange={(e)=>{setTitle(e.target.value)}} />
+            {/* Content */}
             <label htmlFor="Content" className='font-bold' >Blog Content</label>
-            <textarea className='border-gray-400 border-2' name="Content" id="" cols="30" rows="10"></textarea>
-            <label htmlFor="category" className='font-bold'>Category : <span>
-              <select name="category" id="">
+            <textarea className='border-gray-400 border-2' name="Content" id="" cols="30" rows="10" value={Content} onChange={(e)=>{setContent(e.target.value)}}></textarea>
+            {/* Category */}
+            <label htmlFor="category"  className='font-bold'>Category : <span>
+              <select name="category" value={Category} onChange={(e)=>{setCategory(e.target.value)}} id="">
                 <option value="Technology">Technology</option>
                 <option value="Health">Health</option>
                 <option value="Travel">Travel</option>
@@ -37,6 +48,7 @@ const PostingBlogs = () => {
                 <option value="Other">Other</option>
               </select>
             </span></label>
+            {/* Submit Button */}
             <button type='submit' className='postbtn flex p-2 text-2xl font-bold text-green-950 border-2 w-[130px] bg-violet-300 rounded-lg hover:backdrop-blur-lg cursor-pointer transition-transform duration-300 hover:scale-105'>Post Now</button>
           </form>
         </div>
