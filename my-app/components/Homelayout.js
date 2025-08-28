@@ -27,11 +27,11 @@ const Homelayout = () => {
     <div className=" bg-violet-300 min-h-screen w-full p-3">
       <div className="header flex items-center justify-between">
         <div className='flex items-center gap-3'>
-          <span className='log text-blue-600 text-2xl'><i className="fa-solid fa-blog"></i></span>
-          <SplitText text="Blogs"
-            className="text-3xl font-bold "
+          <span className='log text-blue-600 text-3xl'><i className="fa-solid fa-blog"></i></span>
+          <SplitText text="Bluzzer"
+            className="text-3xl font-bold font-serif "
             delay={100}
-            duration={0.6}
+            duration={1.5}
             ease="power3.out"
             splitType="chars"
             from={{ opacity: 0, y: 40 }}
