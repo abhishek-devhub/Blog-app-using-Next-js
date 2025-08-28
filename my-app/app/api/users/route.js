@@ -1,11 +1,12 @@
 
 import User from '@/models/User';
-import { connectDB } from '@/lib/database';
+import { connectDB } from '.bin/lib/database';
 
 export async function GET() {
   await connectDB();
   const users = await User.find();
   return Response.json(users);
+ 
 }   
 
 
@@ -17,3 +18,4 @@ export async function POST(req) {
   await newUser.save();
   return Response.json(newUser);
 }
+
