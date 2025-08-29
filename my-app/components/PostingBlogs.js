@@ -35,7 +35,8 @@ const PostingBlogs = () => {
       console.log(err, "error in posting blog");
     }
     if(!Author || !Title || !Content){
-      console.err("Please fill all the fields");
+      toast.error("Please fill all the fields");
+      return;
     }
 
     // console.log(blogData);
@@ -43,7 +44,7 @@ const PostingBlogs = () => {
 
   return (
     <div>
-      <h1 className='posts text-center text-violet-900 text-5xl font-bold m-4'>Posts your own Blogs Now Free</h1>
+      <h1 className='posts text-center text-violet-950 text-5xl font-bold m-4'>Posts your own Blogs Now Free</h1>
       <div className="both flex justify-around items-center p-2 gap-3">
         <div className="left">
           <Image src="https://img.freepik.com/vector-premium/vector-concepto-blogs_269504-2043.jpg?w=2000" alt='blogingapp' className='rounded-lg hover:scale-101 transition-transform duration-300' height={500} width={570}></Image>
@@ -79,7 +80,7 @@ const PostingBlogs = () => {
           </form>
         </div>
       </div>
-      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
+      <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark"/>
     </div>
 
   )

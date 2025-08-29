@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
      images: {
-    domains: ['img.freepik.com'], // allow this domain
+    domains: ['img.freepik.com',],
+    domains: ['marketplace.canva.com',], // allow this domain
   },
 };
 

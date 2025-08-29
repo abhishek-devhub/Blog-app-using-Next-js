@@ -47,7 +47,7 @@ const Homelayout = () => {
         <nav>
           <ul className="flex space-x-3.5 font-bold text-[22px]">
             <li>
-              <a href="/contact">Contact</a>
+              <a href="/contact">Contact Us</a>
             </li>
             <li>
               {!isloggedIn && <a href="/login">🔒Login</a>}
