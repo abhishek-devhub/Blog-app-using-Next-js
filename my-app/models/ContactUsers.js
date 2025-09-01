@@ -6,4 +6,4 @@ const ContactUsSchema = new mongoose.Schema({
     "Message": {type: String, required: true}
 })
 
-export default mongoose.models.ContactUsSchema|| mongoose.model('ContactUsers', ContactUsSchema);
+export default mongoose.models.ContactUsers|| mongoose.model('ContactUsers', ContactUsSchema);

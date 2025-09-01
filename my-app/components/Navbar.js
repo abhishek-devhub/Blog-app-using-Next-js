@@ -23,6 +23,9 @@ const Navbar = () => {
         </div>
         <nav>
           <ul className="flex space-x-3.5 font-bold text-[22px]">
+             <li>
+              <a href="/myblogs">MyBlogs</a>
+            </li>
             <li>
               <a href="/contact">Contact Us</a>
             </li>

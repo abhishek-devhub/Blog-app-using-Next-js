@@ -5,11 +5,16 @@ import { useAuth } from "@/app/Context/AuthContext";
 import SplitText from './textanimation';
 import TextType from './typinganimation';
 import Navbar from './Navbar';
+import { useOptimistic } from 'react';
 
 
 const Homelayout = () => {
   const [Blogs, setBlogs] = useState([])
   const { isloggedIn } = useAuth();
+ const [optimisticBlogs, addOptimistic] = useOptimistic(
+  Blogs,
+  (state, newBlog) => [newBlog, ...state]
+);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,8 +47,17 @@ const Homelayout = () => {
         <h2 className="text-3xl text-gray-900 font-bold">Unleash Your Thoughts</h2>
         <p className="text-lg mt-2">Explore the latest blogs and articles.</p>
       </div>
-      <div className={`blogs mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6  ${!isloggedIn ? 'blur-sm' : ''}`}>
-        {Blogs.map((blog) => (
+      <div className="erro">
+        {!isloggedIn && (
+        <div className="flex justify-center mt-10">
+          {Blogs &&<p className="bg-black/70 text-white px-6 py-3 rounded-lg text-3xl font-semibold shadow-lg ">
+            🔒 Please login to see the blogs!
+          </p>}
+        </div>
+      )}
+      </div>
+      <div className={`blogs grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-3 ${!isloggedIn ? 'blur-sm' : ''}`}>
+        {optimisticBlogs.map((blog) => (
           <div key={blog.id} className="blog-card bg-white p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-gray-700">
             <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
             <p className="text-gray-600 mb-4">{blog.description}</p>
@@ -51,13 +65,7 @@ const Homelayout = () => {
           </div>
         ))}
       </div>
-      {!isloggedIn && (
-        <div className="relative flex justify-center bottom-50 ">
-          <p className="bg-black/70 text-white px-6 py-3 rounded-lg text-3xl font-semibold shadow-lg ">
-            🔒 Please login to see the blogs!
-          </p>
-        </div>
-      )}
+      
     </div>
   )
 }

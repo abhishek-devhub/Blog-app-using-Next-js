@@ -9,3 +9,9 @@ export async function POST(req) {
     await newContactUser.save();
     return Response.json(newContactUser);
 }
+
+export async function GET() {
+    await connectDB();
+    const contactusers = await ContactUsers.find();
+    return Response.json(contactusers);
+}
