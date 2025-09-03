@@ -15,6 +15,10 @@ const PostingBlogs = () => {
 
   async function handlesubmit(e) {
     e.preventDefault();
+    if(!isloggedIn){
+      toast.error("Please login to post a blog");
+      return;
+    }
     const blogData = { Author, Title, Content, Category };
     try {
       const res = await fetch('/api/blog', {
@@ -24,6 +28,7 @@ const PostingBlogs = () => {
       })
       const data = await res.json()
       console.log("Response: ", data);
+      
       if (res.ok) {
         toast.success("Blog posted successfully!");
         setAuthor('');

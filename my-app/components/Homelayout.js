@@ -19,7 +19,10 @@ const Homelayout = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetch("https://dev.to/api/articles?per_page=5")
+        const data = await fetch('/api/blog',{
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' }
+        })
         const res = await data.json()
         setBlogs(res)
         console.log(res)
@@ -29,6 +32,7 @@ const Homelayout = () => {
     }
     fetchData()
   }, [])
+
   return (
 
     <div className=" min-h-screen w-full">
@@ -58,9 +62,11 @@ const Homelayout = () => {
       </div>
       <div className={`blogs grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-3 ${!isloggedIn ? 'blur-sm' : ''}`}>
         {optimisticBlogs.map((blog) => (
-          <div key={blog.id} className="blog-card bg-white p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-gray-700">
-            <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
-            <p className="text-gray-600 mb-4">{blog.description}</p>
+          <div key={blog.$oid} className="blog-card bg-white p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-gray-700 cursor-pointer">
+            <p className="text-gray-600 mb-4">{blog.Author}</p>
+            <h3 className="text-xl font-semibold mb-2">{blog.Title}</h3>
+            <p className="text-gray-600 mb-4">{blog.Content}</p>
+            <p className="text-gray-600 mb-4">{blog.Category}</p>
             {isloggedIn && <a href={blog.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Read More</a>}
           </div>
         ))}
