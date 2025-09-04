@@ -5,9 +5,9 @@ import SplitText from './textanimation';
 const Navbar = () => {
     const { isloggedIn } = useAuth();
   return (
-    <div className='flex justify-between items-center w-full p-3'>
+    <div className='flex justify-between items-center w-full p-2'>
        <div className='flex items-center gap-3'>
-          <span className='log text-blue-600 text-3xl'><i className="fa-solid fa-blog"></i></span>
+          <span className='log text-blue-600 text-4xl'><i className="fa-solid fa-blog"></i></span>
           <SplitText text="BlogVerse"
             className="text-3xl font-bold font-serif "
             delay={100}
