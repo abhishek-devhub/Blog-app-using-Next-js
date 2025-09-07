@@ -25,8 +25,8 @@ const login = () => {
     })
     const data = await res.json();
     console.log(data)
-    const name = data.find((user) => user.email === username)?.email;
-    const pass = data.find((user) => user.password === password)?.password;
+    const name = data.find((user) => user.email === email)
+    const pass = data.find((user) => user.password === password);
     if (username === name && password === pass) {
       setIsloggedIn(true)
       router.push('/')
@@ -35,16 +35,16 @@ const login = () => {
     }
   }
   return (
-    <div className="fr bg-cyan-100 h-screen">
-      <span className='log text-blue-600 text-4xl m-3 '><i className="fa-solid fa-blog"></i></span>
+    <div className="fr bg-cyan-600 h-screen">
+      {/* <span className='log text-blue-600 text-4xl p-3 border-white border-2 rounded-lg bg-white '><i className="fa-solid fa-blog"></i></span> */}
       <div className="box flex items-center justify-center" >
-        <div className="login border-4 bg-yellow-200 backdrop-blur-3xl p-15 rounded-3xl w-150">
+        <div className="login border-4 backdrop-blur-3xl bg-white p-15 rounded-3xl w-150 mt-10">
           <form onSubmit={handleSubmit} className='flex flex-col gap-5'>
             <h2 className='Blo text-3xl m-2 font-bold font-serif text-center underline'>Login to BlogVerse</h2>
             <label htmlFor="username" className='text-[15px] font-mono font-bold'>Email</label>
-            <input type="text" id="username" name="username" placeholder="Enter Email" className='bg-white rounded-lg p-2 border-2 border-black' onChange={(e) => { setUsername(e.target.value) }} />
+            <input type="text" id="username" name="username" placeholder="Enter Email" className='bg-white rounded-lg p-2 border-2 focus:border-blue-900 focus:border-2' onChange={(e) => { setUsername(e.target.value) }} />
             <label htmlFor="password" className='text-[15px] font-mono font-bold'>Password</label>
-            <input type="password" id="password" name="password" placeholder="Enter Password" className='bg-white rounded-lg p-2 border-2 border-black' onChange={(e) => { setPassword(e.target.value) }} />
+            <input type="password" id="password" name="password" placeholder="Enter Password" className='bg-white rounded-lg p-2 border-2 focus:border-blue-900 focus:border-2' onChange={(e) => { setPassword(e.target.value) }} />
             <button type='submit' className='button border-2 bg-violet-700 font-bold text-white rounded-lg p-2 cursor-pointer hover:bg-violet-800 mt-2 mb-5'>Log in</button>
           </form>
           <small className='font-bold underline '>Not register<button onClick={() => { register() }} className='cursor-pointer font-bold pl-1'> Sign Up for free</button></small>
