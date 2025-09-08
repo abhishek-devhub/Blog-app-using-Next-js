@@ -11,7 +11,7 @@ const login = () => {
   const [password, setPassword] = useState("")
   const router = useRouter()
   const { setIsloggedIn, isloggedIn } = useAuth();
- 
+
 
   function register() {
     router.push('/Registerpage')
@@ -25,8 +25,8 @@ const login = () => {
     })
     const data = await res.json();
     console.log(data)
-    const name = data.find((user) => user.email === email)
-    const pass = data.find((user) => user.password === password);
+    const name = data.find((user) => user.email === username)?.email;
+    const pass = data.find((user) => user.password === password)?.password;
     if (username === name && password === pass) {
       setIsloggedIn(true)
       router.push('/')

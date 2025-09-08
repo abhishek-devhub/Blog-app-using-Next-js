@@ -1,6 +1,7 @@
 import React from 'react'
 import { useAuth } from "@/app/Context/AuthContext";
 import SplitText from './textanimation';
+import Link from 'next/link';
 
 const Navbar = () => {
     const { isloggedIn } = useAuth();
@@ -24,13 +25,13 @@ const Navbar = () => {
         <nav>
           <ul className="flex space-x-3.5 font-bold text-[22px]">
              <li>
-              <a href="/myblogs" className='font-serif'>MyBlogs</a>
+              <Link href="/myblogs" className='font-serif'>MyBlogs</Link >
             </li>
             <li>
-              <a href="/contact" className='font-serif'>Contact Us</a>
+              <Link  href="/contact" className='font-serif'>Contact Us</Link >
             </li>
             <li>
-              {!isloggedIn && <a href="/login" className='font-serif'>🔒Login</a>}
+              {!isloggedIn && <Link  href="/login" className='font-serif'>🔒Login</Link >}
             </li>
           </ul>
         </nav>

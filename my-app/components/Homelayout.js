@@ -6,6 +6,7 @@ import SplitText from './textanimation';
 import TextType from './typinganimation';
 import Navbar from './Navbar';
 import { useOptimistic } from 'react';
+import Link from 'next/link';
 
 
 const Homelayout = () => {
@@ -16,6 +17,9 @@ const Homelayout = () => {
   (state, newBlog) => [newBlog, ...state]
 );
 
+function maincontent(){
+  
+}
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -67,7 +71,7 @@ const Homelayout = () => {
             <h3 className="text-xl font-semibold mb-2">{blog.Title}</h3>
             <p className="text-gray-600 mb-4">{blog.Content}</p>
             <p className="text-gray-600 mb-4">{blog.Category}</p>
-            {isloggedIn && <a href={blog.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Read More</a>}
+            {isloggedIn && <Link href={`/blog/${blog._id}`} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Read More</Link>}
           </div>
         ))}
       </div>
