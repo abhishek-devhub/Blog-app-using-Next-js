@@ -1,10 +1,15 @@
 import React from 'react'
-import { useAuth } from "@/app/Context/AuthContext";
+import { useSession } from 'next-auth/react';
 import SplitText from './textanimation';
 import Link from 'next/link';
+import { useAuth } from '@/app/Context/AuthContext';
 
 const Navbar = () => {
-    const { isloggedIn } = useAuth();
+  const {data: session , status} = useSession();
+  const { isloggedIn } = useAuth();
+
+  const userloggedIn = status === "authenticated" || isloggedIn;
+
   return (
     <div className='flex justify-between items-center w-full p-2'>
        <div className='flex items-center gap-3'>
@@ -23,7 +28,7 @@ const Navbar = () => {
           </SplitText>
         </div>
         <nav>
-          <ul className="flex space-x-3.5 font-bold text-[22px]">
+          <ul className="flex space-x-2 font-bold text-[22px]">
              <li>
               <Link href="/myblogs" className='font-serif'>MyBlogs</Link >
             </li>
@@ -31,7 +36,10 @@ const Navbar = () => {
               <Link  href="/contact" className='font-serif'>Contact Us</Link >
             </li>
             <li>
-              {!isloggedIn && <Link  href="/login" className='font-serif'>🔒Login</Link >}
+              {!userloggedIn && <Link  href="/login" className='font-serif'>Login</Link >}
+            </li>
+            <li>
+              {userloggedIn && <Link  href="/api/auth/signout" className='font-serif'>Logout</Link >}
             </li>
           </ul>
         </nav>

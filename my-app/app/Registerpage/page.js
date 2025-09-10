@@ -8,6 +8,9 @@ const Registerpage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    function authenticateUser() {
+        signIn('github', { callbackUrl: "/" });
+    }
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -96,7 +99,7 @@ const Registerpage = () => {
                     Already have an account? <a href="/login" className="text-indigo-600 font-semibold hover:underline">Login</a>
                 </p>
                 <div className="provider">
-                    <button onClick={()=> {signIn("github")}} className="w-full py-2 mt-4 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold rounded-lg transition duration-300 flex items-center justify-center gap-2 cursor-pointer">
+                    <button onClick={()=> authenticateUser()} className="w-full py-2 mt-4 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold rounded-lg transition duration-300 flex items-center justify-center gap-2 cursor-pointer">
                         <i className="fa-brands fa-github"></i> Continue with GitHub
                     </button>
                 </div>

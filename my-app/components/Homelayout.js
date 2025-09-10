@@ -7,19 +7,18 @@ import TextType from './typinganimation';
 import Navbar from './Navbar';
 import { useOptimistic } from 'react';
 import Link from 'next/link';
-
+import { useSession } from 'next-auth/react';
 
 const Homelayout = () => {
   const [Blogs, setBlogs] = useState([])
-  const { isloggedIn } = useAuth();
  const [optimisticBlogs, addOptimistic] = useOptimistic(
   Blogs,
   (state, newBlog) => [newBlog, ...state]
 );
+  const {data: session , status} = useSession();
+  const {isloggedIn } = useAuth();
 
-function maincontent(){
-  
-}
+  const userloggedIn = status === "authenticated" || isloggedIn;
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -36,6 +35,7 @@ function maincontent(){
     }
     fetchData()
   }, [])
+
 
   return (
 
@@ -56,7 +56,7 @@ function maincontent(){
         <p className="text-lg mt-2">Explore the latest blogs and articles.</p>
       </div>
       <div className="erro">
-        {!isloggedIn && (
+        {!userloggedIn && (
         <div className="flex justify-center mt-10">
           {Blogs &&<p className="bg-black/70 text-white px-6 py-3 rounded-lg text-3xl font-semibold shadow-lg ">
             🔒 Please login to see the blogs!
@@ -64,14 +64,14 @@ function maincontent(){
         </div>
       )}
       </div>
-      <div className={`blogs grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-3 ${!isloggedIn ? 'blur-sm' : ''}`}>
+      <div className={`blogs grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-3 mt-5 ${!userloggedIn ? 'blur-sm' : ''}`}>
         {optimisticBlogs.map((blog) => (
           <div key={blog.$oid} className="blog-card bg-white p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-gray-700 cursor-pointer">
             <p className="text-gray-600 mb-4">{blog.Author}</p>
             <h3 className="text-xl font-semibold mb-2">{blog.Title}</h3>
             <p className="text-gray-600 mb-4">{blog.Content}</p>
             <p className="text-gray-600 mb-4">{blog.Category}</p>
-            {isloggedIn && <Link href={`/blog/${blog._id}`} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Read More</Link>}
+            {userloggedIn && <Link href={`/blog/${blog._id}`} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Read More</Link>}
           </div>
         ))}
       </div>
