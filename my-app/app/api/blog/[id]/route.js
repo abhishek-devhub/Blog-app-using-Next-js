@@ -2,11 +2,9 @@
 import BlogPost from "@/models/BlogPost";
 import { connectDB } from "@/lib/database";
 
-
-
-export async function DELETE(req, {params}) {
+export async function GET(req,{params}){
     await connectDB();
-    const { id } = params
-    const deletedBlogPost = await BlogPost.findByIdAndDelete(id);
-    return Response.json({ message: 'Blog post deleted', deletedBlogPost });
+    const {id} =params;
+    const blog = await BlogPost.findById(id);
+    return Response.json(blog);
 }
