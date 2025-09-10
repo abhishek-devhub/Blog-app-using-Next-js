@@ -2,7 +2,6 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useAuth } from "@/app/Context/AuthContext";
-import SplitText from './textanimation';
 import TextType from './typinganimation';
 import Navbar from './Navbar';
 import { useOptimistic } from 'react';
@@ -37,6 +36,7 @@ const Homelayout = () => {
   }, [])
 
 
+
   return (
 
     <div className=" min-h-screen w-full">
@@ -69,9 +69,9 @@ const Homelayout = () => {
           <div key={blog.$oid} className="blog-card bg-white p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-gray-700 cursor-pointer">
             <p className="text-gray-600 mb-4">{blog.Author}</p>
             <h3 className="text-xl font-semibold mb-2">{blog.Title}</h3>
-            <p className="text-gray-600 mb-4">{blog.Content}</p>
+            <p  className="text-gray-600 mb-4">{blog.Content.substring(0,100)}...</p>
             <p className="text-gray-600 mb-4">{blog.Category}</p>
-            {userloggedIn && <Link href={`/blog/${blog._id}`} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Read More</Link>}
+            {userloggedIn && <Link href={`/blog/${blog._id}`} className="text-blue-500 hover:underline">Read More</Link>}
           </div>
         ))}
       </div>
