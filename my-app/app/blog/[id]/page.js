@@ -10,14 +10,18 @@ const Blog = () => {
   const [comment, setcomment] = useState('')
   const [comments, setcomments] = useState([])
 
+    function deletecomment(index){
+      const newcomment = comments.filter((cmt , i)=> i!== index);
+      setcomments(newcomment);
+    }
+
   function CommentSection(comment){
-    console.log("Comment Posted: ", comment); 
-    setcomments([...comments, comment]);
-    setcomment('');
-    if(!comment){
+    if(comment.trim() === ''){
       alert("Comment cannot be empty");
       return;
     }
+    setcomments([...comments, comment]);
+    setcomment('');
   }
 
   useEffect(()=>{
@@ -49,8 +53,11 @@ const Blog = () => {
           <input type="text" placeholder='Add a comment' value={comment} className='comment p-2 m-2' onChange={(e)=> setcomment(e.target.value)}  />
           <button onClick={()=> CommentSection(comment)} className="mt-2 px-4 py-2 bg-blue-500 text-white rounded">Post Comment</button>
           {comments.map((cmt , index)=>(
-            <div key={index} className="border-b py-2">
-              <p>{cmt}</p>
+            <div key={index} className="border-2 p-2 m-2 rounded">
+              <div className="comm flex justify-between">
+              <p className='text-2xl capitalize p-2'>{cmt}</p>
+              <div className="delete" onClick={()=>{deletecomment(index)}} ><i className="fa-solid fa-trash border-4 rounded-full p-2 cursor-pointer text-red-500 text-2xl" ></i></div> 
+              </div>
             </div>
           ))}
         </div>
