@@ -10,10 +10,10 @@ const Blog = () => {
   const [comment, setcomment] = useState('')
   const [comments, setcomments] = useState([])
 
-    function deletecomment(index){
-      const newcomment = comments.filter((cmt , i)=> i!== index);
-      setcomments(newcomment);
-    }
+    // function deletecomment(index){
+    //   const newcomment = comments.filter((cmt , i)=> i!== index);
+    //   setcomments(newcomment);
+    // }
 
   function CommentSection(comment){
     if(comment.trim() === ''){
@@ -56,7 +56,7 @@ const Blog = () => {
             <div key={index} className="border-2 p-2 m-2 rounded">
               <div className="comm flex justify-between">
               <p className='text-2xl capitalize p-2'>{cmt}</p>
-              <div className="delete" onClick={()=>{deletecomment(index)}} ><i className="fa-solid fa-trash border-4 rounded-full p-2 cursor-pointer text-red-500 text-2xl" ></i></div> 
+              {/* <div className="delete" onClick={()=>{deletecomment(index)}} ><i className="fa-solid fa-trash border-4 rounded-full p-2 cursor-pointer text-red-500 text-2xl" ></i></div>  */}
               </div>
             </div>
           ))}
