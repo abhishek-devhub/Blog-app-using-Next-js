@@ -17,7 +17,7 @@ export async function POST(req) {
       Title,
       Content,
       Category,
-      image, // ✅ directly save Cloudinary URL
+      image,
     });
 
     await newBlogPost.save();
@@ -39,3 +39,4 @@ export async function GET() {
     return new Response(JSON.stringify({ error: "Failed to fetch blogs" }), { status: 500 });
   }
 }
+

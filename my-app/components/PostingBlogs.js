@@ -28,10 +28,9 @@ const PostingBlogs = () => {
     }
 
     try {
-      // 1. Upload image to Cloudinary
       const formData = new FormData();
       formData.append("file", image);
-      formData.append("upload_preset", "blog_preset"); // from Cloudinary
+      formData.append("upload_preset", "blog_preset"); 
 
       const cloudinaryRes = await fetch(
         `https://api.cloudinary.com/v1_1/docjjea7i/image/upload`,
@@ -50,11 +49,7 @@ const PostingBlogs = () => {
         return;
       }
       const imageUrl = cloudinaryData.secure_url;
-
-      // 2. Create blog data
       const blogData = { Author, Title, Content, Category, image: imageUrl };
-
-      // 3. Save to your DB
       const res = await fetch("/api/blog", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
