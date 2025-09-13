@@ -47,6 +47,7 @@ const myblogs = () => {
                 {!Loading ? (<div className='text-center text-3xl m-40'>Loading...</div>):
                 Blogs.length > 0 ? (Blogs.map((blog) => (
                     <div key={blog._id} className="fetchedblogs border-2 w-140  m-2 p-2 rounded-lg flex flex-col gap-2 backdrop-blur-lg cursor">
+                        <div>{blog.image}</div>
                         <div className="author">Author Name : {blog.Author}</div>
                         <div className="title">Title : {blog.Title}</div>
                         <div className="content">Content : {blog.Content}</div>

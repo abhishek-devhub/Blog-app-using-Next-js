@@ -67,6 +67,7 @@ const Homelayout = () => {
       <div className={`blogs grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-3 mt-5 ${!userloggedIn ? 'blur-sm' : ''}`}>
         {optimisticBlogs.map((blog) => (
           <div key={blog.$oid} className="blog-card bg-white p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-gray-700 cursor-pointer">
+            <p>{blog.image}</p>
             <p className="text-gray-600 mb-4">{blog.Author}</p>
             <h3 className="text-xl font-semibold mb-2">{blog.Title}</h3>
             <p  className="text-gray-600 mb-4">{blog.Content.substring(0,100)}...</p>

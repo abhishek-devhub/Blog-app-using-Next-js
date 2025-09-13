@@ -10,42 +10,66 @@ const PostingBlogs = () => {
   const [Title, setTitle] = useState('');
   const [Content, setContent] = useState('');
   const [Category, setCategory] = useState('Technology');
+  const [image, setImage] = useState(null);
 
   const isloggedIn = useAuth()
 
-  async function handlesubmit(e) {
-    e.preventDefault();
-    if(!isloggedIn){
-      toast.error("Please login to post a blog");
-      return;
-    }
-    const blogData = { Author, Title, Content, Category };
-    try {
-      const res = await fetch('/api/blog', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(blogData)
-      })
-      const data = await res.json()
-      console.log("Response: ", data);
-      
-      if (res.ok) {
-        toast.success("Blog posted successfully!");
-        setAuthor('');
-        setTitle('');
-        setContent('');
-        setCategory('Technology');
-      }
-    } catch (err) {
-      console.log(err, "error in posting blog");
-    }
-    if(!Author || !Title || !Content){
-      toast.error("Please fill all the fields");
-      return;
-    }
+async function handlesubmit(e) {
+  e.preventDefault();
 
-    // console.log(blogData);
+  if (!isloggedIn) {
+    toast.error("Please login to post a blog");
+    return;
   }
+
+  if (!Author || !Title || !Content || !image) {
+    toast.error("Please fill all the fields including image");
+    return;
+  }
+
+  try {
+    // 1. Upload image to Cloudinary
+    const formData = new FormData();
+    formData.append("file", image);
+    formData.append("upload_preset", "blog_preset"); // from Cloudinary
+
+    const cloudinaryRes = await fetch(
+      `https://api.cloudinary.com/v1_1/docjjea7i/image/upload`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const cloudinaryData = await cloudinaryRes.json();
+    const imageUrl = cloudinaryData.secure_url;
+
+    // 2. Create blog data
+    const blogData = { Author, Title, Content, Category, image: imageUrl };
+
+    // 3. Save to your DB
+    const res = await fetch("/api/blog", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(blogData),
+    });
+
+    const data = await res.json();
+    console.log("Response: ", data);
+
+    if (res.ok) {
+      toast.success("Blog posted successfully!");
+      setImage(null);
+      setAuthor("");
+      setTitle("");
+      setContent("");
+      setCategory("Technology");
+    }
+  } catch (err) {
+    console.log(err, "error in posting blog");
+    toast.error("Something went wrong while posting!");
+  }
+}
 
   return (
     <div>
@@ -56,6 +80,9 @@ const PostingBlogs = () => {
         </div>
         <div className='right rounded backdrop-blur-lg w-150 p-3 '>
           <form className='flex flex-col gap-3' onSubmit={handlesubmit}>
+            {/* IMAGE */}
+            <label htmlFor="image" className='font-bold'>Blog Image</label>
+            <input type="file" accept='image/*' className='bg-white rounded-lg p-2 border-2 border-black' onChange={(e) => { setImage(e.target.files[0]) }} />
             {/* Author */}
             <label htmlFor="Name" className='author font-bold'>Author Name</label>
             <input type="text" value={Author} className='bg-white rounded-lg p-2 border-2 border-black' onChange={(e) => { setAuthor(e.target.value) }} />
