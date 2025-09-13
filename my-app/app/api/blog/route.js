@@ -1,38 +1,41 @@
 import BlogPost from '@/models/BlogPost';
 import { connectDB } from '@/lib/database';
-import Cloudinary from '@/lib/Cloudinary'
 
 export async function POST(req) {
-    try {
-        await connectDB();
-        const body = await req.json();
-        const { Author, Title, Content, Category, image } = body;
+  try {
+    await connectDB();
 
-        let imageUrl = "";
-        if (image) {
-            const uploadRes = await cloudinary.uploader.upload(image, {
-                folder: "blogs",
-            });
-            imageUrl = uploadRes.secure_url;
-        }
-        const newBlogPost = new BlogPost({
-            Author,
-            Title,
-            Content,
-            Category,
-            image: imageUrl, // ✅ only URL saved
-        });
+    const body = await req.json();
+    const { Author, Title, Content, Category, image } = body;
 
-        await newBlogPost.save();
-        return Response.json(newBlogPost);
-    } catch (error) {
-         console.error(err);
-        return Response.json({ error: "Something went wrong" }, { status: 500 });
+    if (!Author || !Title || !Content || !Category || !image) {
+      return new Response(JSON.stringify({ error: "Missing required fields" }), { status: 400 });
     }
+
+    const newBlogPost = new BlogPost({
+      Author,
+      Title,
+      Content,
+      Category,
+      image, // ✅ directly save Cloudinary URL
+    });
+
+    await newBlogPost.save();
+
+    return new Response(JSON.stringify(newBlogPost), { status: 201 });
+  } catch (error) {
+    console.error("Error saving blog:", error);
+    return new Response(JSON.stringify({ error: "Something went wrong" }), { status: 500 });
+  }
 }
 
 export async function GET() {
+  try {
     await connectDB();
     const blogposts = await BlogPost.find();
-    return Response.json(blogposts);
+    return new Response(JSON.stringify(blogposts), { status: 200 });
+  } catch (error) {
+    console.error("Error fetching blogs:", error);
+    return new Response(JSON.stringify({ error: "Failed to fetch blogs" }), { status: 500 });
+  }
 }

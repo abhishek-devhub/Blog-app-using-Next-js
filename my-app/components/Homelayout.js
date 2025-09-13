@@ -7,21 +7,22 @@ import Navbar from './Navbar';
 import { useOptimistic } from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 const Homelayout = () => {
   const [Blogs, setBlogs] = useState([])
- const [optimisticBlogs, addOptimistic] = useOptimistic(
-  Blogs,
-  (state, newBlog) => [newBlog, ...state]
-);
-  const {data: session , status} = useSession();
-  const {isloggedIn } = useAuth();
+  const [optimisticBlogs, addOptimistic] = useOptimistic(
+    Blogs,
+    (state, newBlog) => [newBlog, ...state]
+  );
+  const { data: session, status } = useSession();
+  const { isloggedIn } = useAuth();
 
   const userloggedIn = status === "authenticated" || isloggedIn;
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetch('/api/blog',{
+        const data = await fetch('/api/blog', {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' }
         })
@@ -41,7 +42,7 @@ const Homelayout = () => {
 
     <div className=" min-h-screen w-full">
       <div className="header flex items-center justify-between">
-       <Navbar/>
+        <Navbar />
       </div>
       <div className="main-content text-center mt-12">
         <TextType
@@ -57,26 +58,26 @@ const Homelayout = () => {
       </div>
       <div className="erro">
         {!userloggedIn && (
-        <div className="flex justify-center mt-10">
-          {Blogs &&<p className="bg-black/70 text-white px-6 py-3 rounded-lg text-3xl font-semibold shadow-lg ">
-            🔒 Please login to see the blogs!
-          </p>}
-        </div>
-      )}
+          <div className="flex justify-center mt-10">
+            {Blogs && <p className="bg-black/70 text-white px-6 py-3 rounded-lg text-3xl font-semibold shadow-lg ">
+              🔒 Please login to see the blogs!
+            </p>}
+          </div>
+        )}
       </div>
       <div className={`blogs grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-3 mt-5 ${!userloggedIn ? 'blur-sm' : ''}`}>
         {optimisticBlogs.map((blog) => (
           <div key={blog.$oid} className="blog-card bg-white p-4 rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-gray-700 cursor-pointer">
-            <p>{blog.image}</p>
+            <img src={blog.image} alt={blog.Title} width={100} height={100} className=''/>
             <p className="text-gray-600 mb-4">{blog.Author}</p>
             <h3 className="text-xl font-semibold mb-2">{blog.Title}</h3>
-            <p  className="text-gray-600 mb-4">{blog.Content.substring(0,100)}...</p>
+            <p className="text-gray-600 mb-4">{blog.Content.substring(0, 100)}...</p>
             <p className="text-gray-600 mb-4">{blog.Category}</p>
             {userloggedIn && <Link href={`/blog/${blog._id}`} className="text-blue-500 hover:underline">Read More</Link>}
           </div>
         ))}
       </div>
-      
+
     </div>
   )
 }
