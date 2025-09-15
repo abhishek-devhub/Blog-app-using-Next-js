@@ -30,19 +30,19 @@ const Navbar = () => {
         <nav className='navbar'>
           <ul className="flex gap-2 font-bold text-lg ">
             <li>
-              <Link href="/" className='font-mono hover:underline hover:bg-yellow-100 rounded-2xl p-2 hover:text-black '>Home</Link >
+              <Link href="/" className='font-mono hover:underline rounded-2xl p-2 hover:text-green-300 active:text-green-300 '>Home</Link >
             </li>
              <li>
-              <Link href="/myblogs" className='font-mono hover:underline  hover:bg-yellow-100 rounded-2xl p-2 hover:text-black '>MyBlogs</Link >
+              <Link href="/myblogs" className='font-mono hover:underline rounded-2xl p-2 hover:text-green-300 active:text-green-300 '>MyBlogs</Link >
             </li>
             <li>
-              <Link  href="/contact" className='font-mono hover:underline  hover:bg-yellow-100 rounded-2xl p-2 hover:text-black '>ContactUs</Link >
+              <Link  href="/contact" className='font-mono hover:underline rounded-2xl p-2 hover:text-green-300 active:text-green-300'>ContactUs</Link >
             </li>
             <li>
-              {!userloggedIn && <Link  href="/login" className='font-mono hover:underline  hover:bg-yellow-100 rounded-2xl p-2 hover:text-black '>Login</Link >}
+              {!userloggedIn && <Link  href="/login" className='font-mono hover:underline rounded-2xl p-2  hover:text-green-300 active:text-green-300 '>Login</Link >}
             </li>
             <li>
-              {userloggedIn && <Link  href="/api/auth/signout" className='font-mono hover:underline  hover:bg-yellow-100 rounded-2xl p-2 hover:text-black '>Logout</Link >}
+              {userloggedIn && <Link  href="/api/auth/signout" className='font-mono hover:underline   rounded-2xl p-2 hover:text-green-300 active:text-green-300 '>Logout</Link >}
             </li>
           </ul>
         </nav>

@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useAuth } from "@/app/Context/AuthContext";
@@ -7,7 +8,6 @@ import Navbar from './Navbar';
 import { useOptimistic } from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
-import Image from 'next/image';
 
 const Homelayout = () => {
   const [Blogs, setBlogs] = useState([])
@@ -67,7 +67,7 @@ const Homelayout = () => {
       </div>
       <div className={`blogs grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-3 mt-5 ${!userloggedIn ? 'blur-sm' : ''}`}>
         {optimisticBlogs.map((blog) => (
-          <div key={blog.$oid} className="blog-card bg-white p-2 rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-gray-700 cursor-pointer">
+          <div key={blog._id} className="blog-card bg-white p-2 rounded-lg shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-gray-700 cursor-pointer">
             <img src={blog.image} alt={blog.Title} width={100} height={100} className=''/>
             <p className="text-gray-600 mb-2">{blog.Author}</p>
             <h3 className="text-xl font-semibold mb-2">{blog.Title}</h3>

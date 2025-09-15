@@ -1,14 +1,14 @@
 "use client"
 import React from 'react'
 import Image from 'next/image'
-import Navbar from '@/components/Navbar'
 import { useState } from 'react'
-
+import { useRouter } from 'next/navigation'
 
 const Contact = () => {
     const [Name, setName] = useState("")
     const [Email, setEmail] = useState("")
     const [Message, setMessage] = useState("")
+    const Router = useRouter()
 
     async function handleChange(e) {
         e.preventDefault();
@@ -37,7 +37,7 @@ const Contact = () => {
     }
     return (
         <div>
-            <Navbar />
+            <i className="fa-solid fa-arrow-left m-3 text-2xl cursor-pointer" onClick={()=> Router.push('/')}></i>
             <div className="cont text-center">  <h1 className='text-2xl'>Get In Touch</h1>
                 <small>
                     We create small startups. Here you can join us and get to start early than others.
