@@ -17,6 +17,15 @@ const Homelayout = () => {
   );
   const { data: session, status } = useSession();
   const { isloggedIn } = useAuth();
+  const [liked, setliked] = useState(false)
+
+  function likeCount(blogId){
+    setliked(prev=>({
+      ...prev,
+      [blogId]: !prev[blogId]
+    })
+    )
+  }
 
   const userloggedIn = status === "authenticated" || isloggedIn;
   useEffect(() => {
@@ -73,7 +82,10 @@ const Homelayout = () => {
             <h3 className="text-xl font-semibold mb-2">{blog.Title}</h3>
             <p className="text-gray-600 mb-2">{blog.Content.substring(0, 100)}...</p>
             <p className="text-gray-600 mb-2">{blog.Category}</p>
+            <div className="foot flex justify-between">
             {userloggedIn && <Link href={`/blog/${blog._id}`} className="text-blue-500 hover:underline">Read More</Link>}
+            <button><i className={`fa-solid fa-heart transition-transform duration-300 ${liked[blog._id] ? "text-red-400":"text-gray-400"}`} onClick={(e)=>likeCount(blog._id)}></i></button>
+            </div>
           </div>
         ))}
       </div>
