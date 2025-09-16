@@ -4,6 +4,7 @@ import Authprovider from "./Context/AuthContext";
 import SessionWrapper from "@/components/SessionWrapper";
 
 
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -17,6 +18,9 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "BlogVerse",
   description: "Blog Website",
+  icons: {
+    icon: '/faviconbig.png'
+  }
 };
 
 export default function RootLayout({ children }) {
