@@ -68,9 +68,9 @@ const Homelayout = () => {
           </div>
         )}
         <div className="conta flex items-center justify-end mr-2">
-          <div className="search border-2 max-w-60 border-black mt-6">
-            <i className="fa-solid fa-magnifying-glass p-2 rounded-2xl"></i>
-            <input type="text" placeholder='Search By Category...' value={input} className='outline-none bg-transparent ' onChange={(e)=> setinput(e.target.value)} />
+          <div className="search border-2 w-60 border-black mt-6 rounded-2xl bg-white p-2">
+            <input type="text" placeholder='Search By Category...' value={input} className='outline-none ' onChange={(e)=> setinput(e.target.value)} />
+            <i className="fa-solid fa-magnifying-glass p-2 border rounded-2xl bg-blue-300 cursor-pointer" onClick={(e)=> {e.target.value}}></i>
           </div>
         </div>
       </div>
