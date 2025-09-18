@@ -30,7 +30,7 @@ const PostingBlogs = () => {
     try {
       const formData = new FormData();
       formData.append("file", image);
-      formData.append("upload_preset", "blog_preset"); 
+      formData.append("upload_preset", "blog_preset");
 
       const cloudinaryRes = await fetch(
         `https://api.cloudinary.com/v1_1/docjjea7i/image/upload`,
@@ -83,8 +83,35 @@ const PostingBlogs = () => {
         <div className='right rounded backdrop-blur-lg w-150 p-3 '>
           <form className='flex flex-col gap-3' onSubmit={handlesubmit}>
             {/* IMAGE */}
-            <label htmlFor="image" className='font-bold'>Blog Image</label>
-            <input type="file" accept='image/*' className='bg-white rounded-lg p-2 border-2 border-black cursoe- ' onChange={(e) => { setImage(e.target.files[0]) }} />
+            {/* Blog Image Upload */}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="image" className="font-bold text-lg">Blog Image</label>
+
+              <div className="relative w-20 h-20 border-2 border-dashed border-gray-400 rounded-xl flex flex-col items-center justify-center cursor-pointer hover:border-violet-600 transition"
+                onClick={() => document.getElementById("imageUpload").click()}>
+
+                {image ? (
+                  <img
+                    src={URL.createObjectURL(image)}
+                    alt="Preview"
+                    className="w-full h-full object-cover rounded-xl"
+                  />
+                ) : (
+                  <div className="flex flex-col items-center text-gray-500">
+                    <i className="fa-solid fa-cloud-arrow-up text-4xl mb-2"></i>
+                  </div>
+                )}
+              </div>
+
+              <input
+                type="file"
+                id="imageUpload"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+            </div>
+
             {/* Author */}
             <label htmlFor="Name" className='author font-bold'>Author Name</label>
             <input type="text" value={Author} className='bg-white rounded-lg p-2 border-2 border-black' onChange={(e) => { setAuthor(e.target.value) }} />
