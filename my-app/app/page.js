@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Homelayout from "@/components/Homelayout";
 import PostingBlogs from "@/components/PostingBlogs";
-import Footer from "@/components/Footer";
+import Footer from "@/app/blog/[id]/Footer";
 
 
 export default function Home() {
