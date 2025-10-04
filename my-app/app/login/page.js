@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { useAuth } from '../Context/AuthContext'
 
 
+
 const login = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
@@ -19,19 +20,17 @@ const login = () => {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const res = await fetch('api/registeruser', {
-      method: 'GET',
+    const res = await fetch('api/login', {
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: username , password })
     })
-    const data = await res.json();
-    console.log(data)
-    const name = data.find((user) => user.email === username)?.email;
-    const pass = data.find((user) => user.password === password)?.password;
-    if (username === name && password === pass) {
+    const data = await res.json()
+    if (res.status === 200) {
       setIsloggedIn(true)
       router.push('/')
     } else {
-      alert("Invalid Credentials")
+      alert("Invalid Credentials" || data.error)
     }
   }
   return (

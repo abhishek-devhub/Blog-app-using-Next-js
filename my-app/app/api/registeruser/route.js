@@ -1,27 +1,27 @@
 import { connectDB } from "@/lib/database";
-import registeruser from "@/models/registeruser";
+import Registeruser from "@/models/registeruser";
 
 export async function POST(request) {
     try{
         await connectDB();
         const body = await request.json();
         const { username, email, password } = body;
-        const newUser = new registeruser({ username, email, password });
+        const newUser = new Registeruser({ username, email, password });
         await newUser.save();
-        return new Response(JSON.stringify({ message: 'User registered successfully' }), { status: 201 });
+        return Response.json(({ message: 'User registered successfully' }), { status: 201 });
     }catch(err){
         console.log(err);
-        return new Response(JSON.stringify({ error: 'Error registering user' }), { status: 500 });
+        return Response.json(({ error: 'Error registering user' }), { status: 500 });
     }
 }
 
 export async function GET(request) {
     try{
         await connectDB();
-        const users = await registeruser.find({});
-        return new Response(JSON.stringify(users), { status: 200 });
+        const users = await Registeruser.find({});
+        return Response.json(users, { status: 200 });
     }catch(err){
         console.log(err);
-        return new Response(JSON.stringify({ error: 'Error fetching users' }), { status: 500 });
+        return Response.json(({ error: 'Error fetching users' }), { status: 500 });
     }   
 }

@@ -8,43 +8,47 @@ const Registerpage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    function authenticateUser() {
+    async function authenticateUser() {
         signIn('github', { callbackUrl: "/" });
     }
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        if (!username || !email || !password) {
-            alert("Please fill all the fields");
-            return;
-        }
-        const registerData = { username, email, password };
-        fetch('/api/registeruser', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(registerData)
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Success:", data);
-                alert("User registered successfully");
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-                alert("Error registering user");
-            });
-            
-        console.log("User Registered:", { username, email, password });
-        setUsername("");
-        setEmail("");
-        setPassword("");
+const handleRegister = async (e) => {
+  e.preventDefault();
+
+  if (!username || !email || !password) {
+    alert("Please fill all the fields");
+    return;
+  }
+
+  try {
+    const res = await fetch("/api/registeruser", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, email, password }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert(data.message || "User registered successfully ✅");
+      setUsername("");
+      setEmail("");
+      setPassword("");
+    } else {
+      alert(data.error || "Error registering user ❌");
     }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Server error ❌");
+  }
+};
+
     return (
         <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-purple-500 to-indigo-600">
             <div className="bg-white shadow-2xl rounded-xl p-8 w-full max-w-md">
                 <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">Create an Account</h1>
 
-                <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+                <form className="flex flex-col gap-4" onSubmit={handleRegister}>
                     <div>
                         <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
                             Username
