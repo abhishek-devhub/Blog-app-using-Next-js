@@ -120,3 +120,20 @@
     @apply bg-background text-foreground;
   }
 }
+
+::selection {
+  @apply bg-indigo-500 text-white;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-indigo-500;
+}
