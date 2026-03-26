@@ -10,7 +10,7 @@ export function middleware(request) {
   if (pathname.startsWith("/myblogs") && !token) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
-  if (pathname.startsWith("/api") && !token) {
+  if (pathname.startsWith("/api") && !pathname.startsWith("/api/auth") && !pathname.startsWith("/api/registeruser") && !pathname.startsWith("/api/login") && !token) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
   return NextResponse.next();
