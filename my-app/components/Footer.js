@@ -2,7 +2,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <footer className="bg-white border-t border-gray-100 pt-16 pb-8 mt-16 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] w-full">
+    <footer className="bg-white border-t border-gray-100 pt-16 pb-8 mx-auto w-full">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
         <div className="space-y-4">
           <div className="flex items-center gap-2">
@@ -32,10 +32,10 @@ const Footer = () => {
         <div>
           <h3 className="text-sm font-bold tracking-wider text-gray-900 uppercase mb-4">Follow Us</h3>
           <div className="flex space-x-4">
-            <a href="#" className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-50 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all"><i className="fa-brands fa-facebook text-lg"></i></a>
+            <a href="https://www.linkedin.com/in/abhishek-s79/" className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-50 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all"><i className="fa-brands fa-linkedin text-lg"></i></a>
             <a href="#" className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-50 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all"><i className="fa-brands fa-twitter text-lg"></i></a>
             <a href="#" className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-50 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all"><i className="fa-brands fa-instagram text-lg"></i></a>
-            <a href="#" className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-50 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all"><i className="fa-brands fa-github text-lg"></i></a>
+            <a href="https://github.com/abhishek-devhub" className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-50 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-all"><i className="fa-brands fa-github text-lg"></i></a>
           </div>
         </div>
       </div>
