@@ -9,7 +9,7 @@ export async function POST(req) {
     const { Author, Title, Content, Category, image } = body;
 
     if (!Author || !Title || !Content || !Category || !image) {
-      return new Response(JSON.stringify({ error: "Missing required fields" }), { status: 400 });
+      return Response.json({ error: "Missing required fields" }, { status: 400 });
     }
 
     const newBlogPost = new BlogPost({
@@ -22,10 +22,10 @@ export async function POST(req) {
 
     await newBlogPost.save();
 
-    return new Response(JSON.stringify(newBlogPost), { status: 201 });
+    return Response.json(newBlogPost, { status: 201 });
   } catch (error) {
     console.error("Error saving blog:", error);
-    return new Response(JSON.stringify({ error: "Something went wrong" }), { status: 500 });
+    return Response.json({ error: "Something went wrong" }, { status: 500 });
   }
 }
 
@@ -33,10 +33,9 @@ export async function GET() {
   try {
     await connectDB();
     const blogposts = await BlogPost.find();
-    return new Response(JSON.stringify(blogposts), { status: 200 });
+    return Response.json(blogposts, { status: 200 });
   } catch (error) {
     console.error("Error fetching blogs:", error);
-    return new Response(JSON.stringify({ error: "Failed to fetch blogs" }), { status: 500 });
+    return Response.json({ error: "Failed to fetch blogs" }, { status: 500 });
   }
 }
-
