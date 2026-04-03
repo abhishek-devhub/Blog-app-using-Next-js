@@ -1,20 +1,37 @@
 "use client"
 
-import React from 'react'
-import { createContext , useState} from 'react'
-import { useContext } from 'react'
+import React, { createContext, useState, useContext, useEffect } from 'react'
 
 const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
     const [isloggedIn, setIsloggedIn] = useState(false);
+    const [isAuthLoaded, setIsAuthLoaded] = useState(false);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const stored = localStorage.getItem("isloggedIn");
+            if (stored === "true") {
+                setIsloggedIn(true);
+            }
+            setIsAuthLoaded(true);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (isAuthLoaded) {
+            if (isloggedIn) {
+                localStorage.setItem("isloggedIn", "true");
+            } else {
+                localStorage.removeItem("isloggedIn");
+            }
+        }
+    }, [isloggedIn, isAuthLoaded]);
 
   return (
-    <div>
-    <AuthContext.Provider value = {{isloggedIn, setIsloggedIn}}>
+    <AuthContext.Provider value={{ isloggedIn, setIsloggedIn, isAuthLoaded }}>
      {children}   
     </AuthContext.Provider>
-    </div>
   )
 }
 export default AuthProvider;
