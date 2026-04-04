@@ -21,7 +21,7 @@
     "gsap": "^3.13.0",
     "lucide-react": "^0.539.0",
     "mongoose": "^9.4.1",
-    "next": "15.4.6",
+    "next": "^16.2.2",
     "next-auth": "^4.24.11",
     "next-cloudinary": "^6.16.0",
     "react": "19.1.0",
