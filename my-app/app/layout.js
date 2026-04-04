@@ -1,19 +1,7 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Authprovider from "./Context/AuthContext";
 import SessionWrapper from "@/components/SessionWrapper";
-
-
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata = {
   title: "BlogVerse",
@@ -22,6 +10,11 @@ export const metadata = {
     icon: '/faviconbig.png'
   }
 };
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
 
 export default function RootLayout({ children }) {
   return (
@@ -33,7 +26,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
+        className={`${inter.variable} antialiased `}
       >
         <SessionWrapper>
           <Authprovider>
