@@ -45,7 +45,7 @@ const Contact = () => {
                 <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/10 blur-[100px] rounded-full pointer-events-none -z-10"></div>
 
                 <div className="w-full text-center max-w-3xl mb-16 relative z-10">
-                    <span className="text-indigo-600 font-bold tracking-wider text-sm uppercase mb-3 block">Let's Connect</span>
+                    <span className="text-indigo-600 font-bold tracking-wider text-sm uppercase mb-3 block">Let&apos;s Connect</span>
                     <h1 className="text-4xl md:text-5xl font-black text-gray-900 mb-6 tracking-tight">Get In Touch</h1>
                     <p className="text-lg text-gray-500 leading-relaxed font-medium">
                         We create small startups. Here you can join us and get to start earlier than others.

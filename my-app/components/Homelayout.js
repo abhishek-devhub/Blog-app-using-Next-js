@@ -53,7 +53,7 @@ const Homelayout = () => {
   return (
     <div className="min-h-screen w-full bg-[#f8fafc] text-slate-900 font-sans selection:bg-indigo-500 selection:text-white">
       <Navbar />
-      
+
       <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center justify-center min-h-[70vh]">
         <div className="absolute inset-0 z-0 pointer-events-none">
           <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-indigo-500/10 blur-[100px]"></div>
@@ -66,7 +66,7 @@ const Homelayout = () => {
             <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
             Discover the New BlogVerse 2.0
           </div>
-          
+
           <div className="h-24 md:h-32 mb-6">
             <TextType
               className="text-5xl md:text-7xl font-black text-gray-900 tracking-tight leading-tight lg:leading-[1.1]"
@@ -77,7 +77,7 @@ const Homelayout = () => {
               cursorCharacter="|"
             />
           </div>
-          
+
           <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-500 leading-relaxed font-medium mb-10">
             A premium space where curious minds share knowledge, experiences, and extraordinary stories. Join our global community today.
           </p>
@@ -87,9 +87,9 @@ const Homelayout = () => {
               Explore Articles
             </Link>
             {!userloggedIn && (
-                <Link href="/Registerpage" className="px-8 py-4 bg-white text-gray-900 font-bold rounded-2xl shadow-sm border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-300 w-full sm:w-auto">
-                  Start Writing <i className="fa-solid fa-arrow-right ml-2 opacity-70"></i>
-                </Link>
+              <Link href="/Registerpage" className="px-8 py-4 bg-white text-gray-900 font-bold rounded-2xl shadow-sm border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-300 w-full sm:w-auto">
+                Start Writing <i className="fa-solid fa-arrow-right ml-2 opacity-70"></i>
+              </Link>
             )}
           </div>
         </div>
@@ -124,11 +124,11 @@ const Homelayout = () => {
             <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none transition-colors duration-300 group-focus-within:text-indigo-500 text-gray-400">
               <i className="fa-solid fa-magnifying-glass"></i>
             </div>
-            <input 
-              type="text" 
-              placeholder="Search by category..." 
-              value={input} 
-              onChange={(e) => setinput(e.target.value)} 
+            <input
+              type="text"
+              placeholder="Search by category..."
+              value={input}
+              onChange={(e) => setinput(e.target.value)}
               className="w-full pl-12 pr-5 py-3.5 bg-white border border-gray-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent shadow-sm transition-all text-sm font-medium placeholder-gray-400"
             />
           </div>
@@ -136,7 +136,7 @@ const Homelayout = () => {
 
         <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-700 ease-out ${!userloggedIn ? 'opacity-30 grayscale-[0.8] blur-sm pointer-events-none select-none' : 'opacity-100'}`}>
           {Blogs.filter((blog) => blog?.Category?.toLowerCase().includes(input.toLowerCase())).map((blog, idx) => (
-            <div key={blog._id} style={{animationDelay: `${idx * 100}ms`}} className="group bg-white rounded-[2rem] overflow-hidden shadow-[0_2px_15px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500 border border-gray-100 flex flex-col">
+            <div key={blog._id} style={{ animationDelay: `${idx * 100}ms` }} className="group bg-white rounded-[2rem] overflow-hidden shadow-[0_2px_15px_rgb(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500 border border-gray-100 flex flex-col">
               <div className="relative aspect-[4/3] overflow-hidden bg-gray-50">
                 <img src={blog.image || 'https://via.placeholder.com/800x600'} alt={blog.Title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out" loading="lazy" />
                 <div className="absolute top-5 left-5 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-[11px] font-bold text-gray-900 shadow-sm uppercase tracking-widest pointer-events-none">
@@ -149,7 +149,7 @@ const Homelayout = () => {
                     {blog.Author ? blog.Author.charAt(0).toUpperCase() : 'B'}
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-2 mb-4 mt-2">
                   <p className="text-sm font-bold text-indigo-600">{blog.Author || 'Anonymous'}</p>
                   <span className="w-1 h-1 rounded-full bg-gray-300"></span>
@@ -157,7 +157,7 @@ const Homelayout = () => {
                 </div>
                 <h3 className="text-2xl font-black text-gray-900 mb-3 line-clamp-2 leading-tight group-hover:text-indigo-600 transition-colors">{blog.Title}</h3>
                 <p className="text-gray-500 mb-8 line-clamp-3 text-sm flex-grow leading-relaxed">{blog.Content?.substring(0, 150)?.replace(/<[^>]*>?/gm, '') || ''}...</p>
-                
+
                 <div className="flex items-center justify-between mt-auto pt-5 border-t border-gray-100/80">
                   {userloggedIn && (
                     <Link href={`/blog/${blog._id}`} className="inline-flex items-center gap-2 text-sm font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">
@@ -175,7 +175,7 @@ const Homelayout = () => {
           {userloggedIn && Blogs.length === 0 && (
             <div className="col-span-full py-20 text-center">
               <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gray-50 text-gray-400 text-3xl mb-4">
-                 <i className="fa-regular fa-newspaper"></i>
+                <i className="fa-regular fa-newspaper"></i>
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2">No Stories found</h3>
               <p className="text-gray-500">Be the first one to publish a brilliant story!</p>
