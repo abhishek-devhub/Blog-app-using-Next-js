@@ -10,29 +10,72 @@ import { useSession } from 'next-auth/react';
 const Homelayout = () => {
   const [Blogs, setBlogs] = useState([]);
   const { data: session, status } = useSession();
-  const { isloggedIn } = useAuth();
+  const { isloggedIn, userEmail } = useAuth();
   const [liked, setliked] = useState({});
   const [input, setinput] = useState('');
+  
+  const activeEmail = session?.user?.email || userEmail;
+  const userloggedIn = status === "authenticated" || isloggedIn;
+
+  useEffect(() => {
+    const fetchFavs = async () => {
+      if (!activeEmail) {
+        setliked({});
+        return;
+      }
+      try {
+        const res = await fetch(`/api/favorites?email=${activeEmail}`);
+        if (res.ok) {
+          const data = await res.json();
+          const likesObj = {};
+          data.blogIds.forEach(id => {
+            likesObj[id] = true;
+          });
+          setliked(likesObj);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    fetchFavs();
+  }, [activeEmail]);
 
   async function likeCount(blogId) {
-    if (liked[blogId]) return;
-    setliked(prev => ({
-      ...prev,
-      [blogId]: true
-    }));
+    if (!activeEmail) {
+      alert("Please login to like articles.");
+      return;
+    }
+
+    const isLiked = liked[blogId];
+    const newLiked = { ...liked };
+    
+    if (isLiked) {
+      delete newLiked[blogId];
+    } else {
+      newLiked[blogId] = true;
+    }
+    
+    setliked(newLiked);
+
     try {
+      // 1. Update Favorite model
+      await fetch('/api/favorites', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: activeEmail, blogId, action: isLiked ? 'unlike' : 'like' })
+      });
+
+      // 2. Update BlogPost likes count
       await fetch(`/api/blog/${blogId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'like' })
+        body: JSON.stringify({ action: isLiked ? 'unlike' : 'like' })
       });
-      setBlogs(prev => prev.map(b => b._id === blogId ? { ...b, likes: (b.likes || 0) + 1 } : b));
+      setBlogs(prev => prev.map(b => b._id === blogId ? { ...b, likes: isLiked ? Math.max(0, (b.likes || 0) - 1) : (b.likes || 0) + 1 } : b));
     } catch (error) {
       console.error("Error liking blog:", error);
     }
   }
-
-  const userloggedIn = status === "authenticated" || isloggedIn;
 
   useEffect(() => {
     const fetchData = async () => {
