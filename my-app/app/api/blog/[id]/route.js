@@ -30,6 +30,9 @@ export async function PATCH(req, {params}){
         if (body.action === 'like') {
             const updatedBlog = await BlogPost.findByIdAndUpdate(id, { $inc: { likes: 1 } }, { new: true })
             return Response.json(updatedBlog)
+        } else if (body.action === 'unlike') {
+            const updatedBlog = await BlogPost.findByIdAndUpdate(id, { $inc: { likes: -1 } }, { new: true })
+            return Response.json(updatedBlog)
         } else if (body.action === 'comment') {
             const updatedBlog = await BlogPost.findByIdAndUpdate(id, { $push: { comments: body.comment } }, { new: true })
             return Response.json(updatedBlog)
