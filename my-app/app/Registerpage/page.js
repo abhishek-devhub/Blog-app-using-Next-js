@@ -132,7 +132,7 @@ const Registerpage = () => {
               <button 
                 type="button" 
                 onClick={() => setopeneye(!eye)} 
-                className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-indigo-600 transition-colors focus:outline-none"
+                className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-indigo-600 transition-colors focus:outline-none cursor-pointer"
               >
                 <i className={`fa-solid ${eye ? "fa-eye" : "fa-eye-slash"}`}></i>
               </button>
