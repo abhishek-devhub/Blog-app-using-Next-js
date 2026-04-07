@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
   const { data: session, status } = useSession();
-  const { isloggedIn, setIsloggedIn } = useAuth();
+  const { isloggedIn, setIsloggedIn, setUserEmail } = useAuth();
   const router = useRouter();
 
   const userloggedIn = status === "authenticated" || isloggedIn;
@@ -17,6 +17,7 @@ const Navbar = () => {
     try {
       if (isloggedIn) {
         setIsloggedIn(false);
+        if (setUserEmail) setUserEmail("");
       }
       if (status === "authenticated") {
         await signOut({ callbackUrl: '/' });
@@ -29,7 +30,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 inset-x-0 z-50 flex justify-center w-full px-6 py-4 pointer-events-none">
+    <div className=" top-0 inset-x-0 z-50 flex justify-center w-full px-6 py-4 pointer-events-none">
       <nav className="flex justify-between items-center w-full max-w-5xl px-6 py-3 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] backdrop-blur-xl bg-white/70 border border-white/40 pointer-events-auto transition-all duration-300">
         <div className="flex items-center gap-3">
           <span className="text-indigo-600 text-3xl shrink-0"><i className="fa-solid fa-blog"></i></span>
@@ -53,6 +54,11 @@ const Navbar = () => {
           <li>
             <Link href="/myblogs" className="hover:text-indigo-600 transition-colors duration-200">MyBlogs</Link>
           </li>
+          {userloggedIn && (
+            <li>
+              <Link href="/favorites" className="hover:text-indigo-600 transition-colors duration-200">Favorites</Link>
+            </li>
+          )}
           <li>
             <Link href="/contact" className="hover:text-indigo-600 transition-colors duration-200">Contact</Link>
           </li>

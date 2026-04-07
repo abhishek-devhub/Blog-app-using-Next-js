@@ -10,7 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [eye, setopeneye] = useState(false);
   const router = useRouter();
-  const { setIsloggedIn } = useAuth();
+  const { setIsloggedIn, setUserEmail } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -32,6 +32,7 @@ const Login = () => {
       }
 
       if (res.status === 200) {
+        setUserEmail(data.user.email);
         setIsloggedIn(true);
         router.push('/');
       } else {
@@ -104,7 +105,7 @@ const Login = () => {
               <button 
                 type="button" 
                 onClick={() => setopeneye(!eye)} 
-                className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-indigo-600 transition-colors focus:outline-none"
+                className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-indigo-600 transition-colors focus:outline-none cursor-pointer"
               >
                 <i className={`fa-solid ${eye ? "fa-eye" : "fa-eye-slash"}`}></i>
               </button>
