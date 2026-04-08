@@ -38,7 +38,7 @@ const Contact = () => {
     }
 
     return (
-        <div className="min-h-screen bg-[#f8fafc] flex flex-col font-sans mt-20">
+        <div className="min-h-screen bg-[#f8fafc] flex flex-col font-sans">
             <Navbar />
             <main className="flex-grow flex flex-col items-center py-16 px-6 max-w-7xl mx-auto w-full relative">
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/10 blur-[100px] rounded-full pointer-events-none -z-10"></div>
@@ -134,7 +134,7 @@ const Contact = () => {
                             
                             <button 
                                 type="submit" 
-                                className="w-full mt-4 bg-gray-900 text-white font-bold py-4 rounded-xl shadow-[0_4px_14px_0_rgb(0,0,0,0.2)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.23)] hover:-translate-y-0.5 hover:bg-gray-800 transition-all duration-300"
+                                className="w-full mt-4 bg-gray-900 text-white font-bold py-4 rounded-xl shadow-[0_4px_14px_0_rgb(0,0,0,0.2)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.23)] hover:-translate-y-0.5 hover:bg-gray-800 transition-all duration-300 cursor-pointer"
                             >
                                 Send Message
                             </button>

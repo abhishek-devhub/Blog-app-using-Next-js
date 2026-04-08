@@ -62,7 +62,7 @@ const Blog = () => {
     <div className="min-h-screen bg-slate-50 flex flex-col">
       <Navbar />
 
-      <main className="flex-grow w-full max-w-4xl mx-auto px-6 py-12">
+      <main className="flex-grow w-full max-w-4xl mx-auto px-6 py-12 ">
         <article className="bg-white shadow-xl rounded-3xl overflow-hidden border border-gray-100">
           <div className="w-full h-64 md:h-96 relative bg-gray-100">
             <img
@@ -112,6 +112,12 @@ const Blog = () => {
                 placeholder="Share your thoughts..."
                 value={comment}
                 onChange={(e) => setcomment(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    CommentSection(comment);
+                  }
+                }}
                 className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all outline-none"
               />
             </div>

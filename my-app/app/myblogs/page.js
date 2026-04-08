@@ -63,7 +63,7 @@ const MyBlogs = () => {
     }
 
     return (
-        <div className="min-h-screen bg-[#f8fafc] flex flex-col font-sans mt-20">
+        <div className="min-h-screen bg-[#f8fafc] flex flex-col font-sans">
             <Navbar />
 
             <main className="flex-grow w-full max-w-7xl mx-auto px-6 py-12">
